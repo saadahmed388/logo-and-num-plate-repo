@@ -118,8 +118,8 @@ def detect(image):
                 for result in ocr_result:
                     length = np.sum(np.subtract(result[0][1],result[0][0]))
                     width = np.sum(np.subtract(result[0][2],result[0][1]))
-                    threshold = (length*width)/30000
-                    if(threshold>0.6): list.append(result[1])
+                    threshold = (length*width)/40000
+                    if(threshold>0.3): list.append(result[1])
                 str1 = " "   
                 str1 = str1.join(list)    
                 text_out2 = 'License registration number is : ' + str1
