@@ -1,0 +1,10 @@
+item {
+    id: 1
+    name: 'Logo'
+}
+item {
+    id: 2
+    name: 'Number Plate'
+}
+
+
