@@ -14,8 +14,8 @@ import gradio as gr
 
 print (tf.__version__)
 
-PATH_TO_SAVED_MODEL = "D:\\Projects\\Detection\\Trained_Models\\loc_model1\\saved_model" #Input the path where the model of detection and localization is
-new_model = tf.keras.models.load_model("D:\\Projects\\Detection\\Trained_Models\\cnn_model") # load the cnn model for logo brand prediction
+PATH_TO_SAVED_MODEL = "Trained_Models\\loc_model1\\saved_model" #Input the path where the model of detection and localization is
+new_model = tf.keras.models.load_model("Trained_Models\\cnn_model") # load the cnn model for logo brand prediction
 print('Loading model...', end='')
 start_time = time.time()
 
@@ -26,7 +26,7 @@ end_time = time.time()
 elapsed_time = end_time - start_time
 print('Done! Took {} seconds'.format(elapsed_time))
 
-category_index = label_map_util.create_category_index_from_labelmap("D:\\Projects\\Detection\\label_map.pbtxt",
+category_index = label_map_util.create_category_index_from_labelmap("label_map.pbtxt",
                                                                     use_display_name=True)
 
 

@@ -6,5 +6,7 @@ For the number plate part, easyocr library is used to produce string output by r
 Further more, the model for detection on images is deployed using the gradio interface.
 The detection on images can be done using the detection-image.py file and for performing detection using webcam or videofile upload can be done using detection-vid.py file (For the video part, when the frame window opens after running the code, press 'q' for performing the prediction, pressing 'a' breaks the operation).
 
+On running detection-to-video.py file (Input method be video file or webcam) an avi video file named 'detected.avi' will be saved on a fps rate of 20 in the working directory (pressing 'a' would stop the saving)
+
 
 

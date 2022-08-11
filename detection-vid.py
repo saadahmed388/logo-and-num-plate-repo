@@ -7,8 +7,8 @@ from object_detection.utils import visualization_utils as viz_utils
 
 print (tf.__version__)
 
-PATH_TO_SAVED_MODEL = "D:\\Projects\\Detection\\Trained_Models\\loc_model1\\saved_model" #Input the path where the model of detection and localization is
-new_model = tf.keras.models.load_model("D:\\Projects\\Detection\\Trained_Models\\cnn_model") # load the cnn model for logo brand prediction
+PATH_TO_SAVED_MODEL = "Trained_Models\\loc_model1\\saved_model" #Input the path where the model of detection and localization is
+new_model = tf.keras.models.load_model("Trained_Models\\cnn_model") # load the cnn model for logo brand prediction
 print('Loading model...', end='')
 start_time = time.time()
 
@@ -19,7 +19,7 @@ end_time = time.time()
 elapsed_time = end_time - start_time
 print('Done! Took {} seconds'.format(elapsed_time))
 
-category_index = label_map_util.create_category_index_from_labelmap("D:\\Projects\\Detection\\label_map.pbtxt",##Input the path of label_map.pbtxt
+category_index = label_map_util.create_category_index_from_labelmap("label_map.pbtxt",##Input the path of label_map.pbtxt
                                                                     use_display_name=True)
 
 import numpy as np
@@ -32,7 +32,7 @@ import easyocr
 
 warnings.filterwarnings('ignore')   
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0) # argument in VideoCapture needs to be 0 for webcam and path for video file
 
 while True:
     success, image_np = cap.read()
