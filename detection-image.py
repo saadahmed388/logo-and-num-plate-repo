@@ -65,8 +65,8 @@ def detect(image):
                         
         im_height, im_width, im_chan = image.shape
         
-
-        for i in range(5):
+        i = 0
+        while(flag1==False or flag2==False):
             if detections['detection_classes'][i] == 1 and flag1 == False:
                 
                 ymin,xmin,ymax,xmax = detections['detection_boxes'][i]
@@ -78,23 +78,23 @@ def detect(image):
 
                 dim =(256,256)
                 
-                class_names = ['hyundai','lexus','mazda','mercedes','opel','skoda','toyota','volkswagen'] # due to lack of datasets , currently limited to  8 brands only
+                class_names = ['Hyundai','Lexus','Mazda','Mercedes','Opel','Skoda','Toyota','Volkswagen'] # due to lack of datasets , currently limited to  8 brands only
                 img = cv2.imread('logo.jpg')
                 crop_img = img[round(ymin):round(ymax), round(xmin):round(xmax)]
                 crop_img = crop_img.copy()
-                resized = cv2.resize(crop_img, dim, interpolation = cv2.INTER_AREA)
+                resized2 = cv2.resize(crop_img, dim, interpolation = cv2.INTER_AREA)
                 confidence = round((detections['detection_scores'][i]*100),2)
                 print('Detected logo with ',confidence,'% confidence')
                 
                 
-                resized = np.expand_dims(resized,0)
+                resized = np.expand_dims(resized2,0)
                 prediction = new_model.predict(resized)
                 confidence = round((np.max(prediction)*100),2)
                 print('Predicted brand is',class_names[np.argmax(prediction)])
                 print('with',confidence,'% confidence')  
-                text_out = 'Predicted brand is '+ class_names[np.argmax(prediction)] + ' with ' + str(confidence) + '% confidence....'                                                                  
+                text_out = 'Predicted brand is '+ class_names[np.argmax(prediction)]                                                                  
                 flag1 = True
-                i +=1
+                i += 1
                 
             if detections['detection_classes'][i] == 2 and flag2 == False:
                 ymin,xmin,ymax,xmax = detections['detection_boxes'][i]
@@ -118,14 +118,15 @@ def detect(image):
                 for result in ocr_result:
                     length = np.sum(np.subtract(result[0][1],result[0][0]))
                     width = np.sum(np.subtract(result[0][2],result[0][1]))
-                    threshold = (length*width)/40000
-                    if(threshold>0.3): list.append(result[1])
+                    threshold = (length*width)/30000
+                    if(threshold>0.6): list.append(result[1])
                 str1 = " "   
                 str1 = str1.join(list)    
                 text_out2 = 'License registration number is : ' + str1
                 
                 confidence1 = round((detections['detection_scores'][i]*100),2)
                 flag2 = True
+                i+=1
                 
             if flag1 == True and flag2 == True:
                 return (image_np_with_detections,resized1,text_out,text_out2)

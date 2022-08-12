@@ -7,8 +7,8 @@ from object_detection.utils import visualization_utils as viz_utils
 
 print (tf.__version__)
 
-PATH_TO_SAVED_MODEL = "Trained_Models\\loc_model1\\saved_model" #Input the path where the model of detection and localization is
-new_model = tf.keras.models.load_model("Trained_Models\\cnn_model") # load the cnn model for logo brand prediction
+PATH_TO_SAVED_MODEL = "D:\\Projects\\Detection\\Trained_Models\\loc_model1\\saved_model" #Input the path where the model of detection and localization is
+new_model = tf.keras.models.load_model("D:\\Projects\\Detection\\Trained_Models\\cnn_model") # load the cnn model for logo brand prediction
 print('Loading model...', end='')
 start_time = time.time()
 
@@ -19,7 +19,7 @@ end_time = time.time()
 elapsed_time = end_time - start_time
 print('Done! Took {} seconds'.format(elapsed_time))
 
-category_index = label_map_util.create_category_index_from_labelmap("label_map.pbtxt",##Input the path of label_map.pbtxt
+category_index = label_map_util.create_category_index_from_labelmap("D:\\Projects\\Detection\\label_map.pbtxt",##Input the path of label_map.pbtxt
                                                                     use_display_name=True)
 
 import numpy as np
@@ -32,7 +32,7 @@ import easyocr
 
 warnings.filterwarnings('ignore')   
 
-cap = cv2.VideoCapture(0) # argument in VideoCapture needs to be 0 for webcam and path for video file
+cap = cv2.VideoCapture(0)
 
 while True:
     success, image_np = cap.read()
@@ -76,8 +76,8 @@ while True:
         im_height, im_width, im_chan = image_np.shape
         global text_out
         global text_out2
-
-        for i in range(5):
+        i=0
+        while(flag1==False or flag2==False):
             if detections['detection_classes'][i] == 1 and flag1 == False:
                 
                 ymin,xmin,ymax,xmax = detections['detection_boxes'][i]
@@ -89,7 +89,7 @@ while True:
 
                 dim =(256,256)
                 
-                class_names = ['hyundai','lexus','mazda','mercedes','opel','skoda','toyota','volkswagen'] # due to lack of datasets , currently limited to  8 brands only
+                class_names = ['Hyundai','Lexus','Mazda','Mercedes','Opel','Skoda','Toyota','Volkswagen'] # due to lack of datasets , currently limited to  8 brands only
                 img = cv2.imread('logo.jpg')
                 crop_img = img[round(ymin):round(ymax), round(xmin):round(xmax)]
                 crop_img = crop_img.copy()
@@ -105,7 +105,7 @@ while True:
                 #print('with',confidence,'% confidence')  
                 text_out = 'Predicted brand is '+ class_names[np.argmax(prediction)] + ' with ' + str(confidence) + '% confidence....'                                                                  
                 flag1 = True
-                i +=1
+                i+=1
                 
             if detections['detection_classes'][i] == 2 and flag2 == False:
                 ymin,xmin,ymax,xmax = detections['detection_boxes'][i]
@@ -137,7 +137,7 @@ while True:
                 
                 confidence1 = round((detections['detection_scores'][i]*100),2)
                 flag2 = True
-                
+                i+=1
             if flag1 == True and flag2 == True:
                break
         print(text_out+'\n'+text_out2)       
