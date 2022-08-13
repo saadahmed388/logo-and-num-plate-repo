@@ -1,13 +1,9 @@
-import os
 import time
 import tensorflow as tf
 from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as viz_utils
 import easyocr
 import numpy as np
-
-from PIL import Image
-import matplotlib.pyplot as plt
 import warnings
 import cv2
 import gradio as gr
