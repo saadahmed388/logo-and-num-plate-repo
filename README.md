@@ -1,5 +1,6 @@
 # logo and num plate repo
 Summary:-
+
 In this project tensorflow object detecting module is used to train the object detection model using RESNET 640 x 640 architecture, the dataset was self collected and was annotated for logo and number plate using labelimg tool
 Used a CNN for car logo brand prediction (logo brand prediction is limited to these 8 brands namely "Hyundai","Lexus","Mercedes","Opel","Skoda","Toyota","Volkswagen","Mazda" due to lack of dataset), the dataset was trained on Xception CNN architecture which is a slightly advanced version of inception V3.Training on this model resulted in a validation accuracy of 86%.
 For the number plate part, easyocr library is used to produce string output by reading the number plate.
